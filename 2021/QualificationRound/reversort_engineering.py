@@ -32,12 +32,10 @@ def solve(N: int, C: int) -> Optional[List[int]]:
     
     return result
 
-import sys
-sys.stdin = open('test.txt', 'r')
-
 T = int(input())
 for i in range(T):
     N, C = list(map(lambda x : int(x), input().split()))
     result = solve(N, C)
     statement = " ".join(list(map(str, result))) if result is not None else "IMPOSSIBLE"
     print(f"Case #{i+1}: {statement}")
+
