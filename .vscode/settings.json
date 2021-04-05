@@ -1,0 +1,4 @@
+{
+    "python.pythonPath": "/Users/normanlim/.local/share/virtualenvs/codejam-PeEA4-XF/bin/python",
+    "python.formatting.provider": "black"
+}
