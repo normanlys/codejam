@@ -1,9 +1,8 @@
-from typing import OrderedDict
+from collections import OrderedDict
 
 
 def solve(ordered_dict: OrderedDict) -> int:
-    sum_all: int = 0
-
+    sum_all = 0
     for p, n in ordered_dict.items():
         sum_all += p * n
 
@@ -17,12 +16,13 @@ def solve(ordered_dict: OrderedDict) -> int:
         for p, n in ordered_dict.items():
             count = 0
             while product % p == 0:
-                product = int(product / p)
+                product //= p
                 count += 1
 
             if count > n:
                 ok = False
                 break
+
             we_got_sum += count * p
 
         if not ok:
