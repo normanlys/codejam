@@ -1,32 +1,50 @@
-import math
-from typing import List
+from typing import OrderedDict
 
-def product_of_cards(array: List[int]) -> int:
-    if len(array) == 1:
-        return array[1]
-    else:
-        return math.prod(array)
 
-def solve(array: List[int]) -> int:
-    total = sum(array)
-    max_sum = 0
-    # n_product_cards = 1
-    # while n_product_cards < len(array):
-    #     for i in range(1, n_product_cards+1):
-    #         while i > 0:
-    #             for j in range(len(array)):
-    #                 pass
-    #     n_product_cards += 1
+def solve(ordered_dict: OrderedDict) -> int:
+    sum_all: int = 0
 
-    return max_sum
+    for p, n in ordered_dict.items():
+        sum_all += p * n
+
+    for sum_of_product_cards in range(2, 7000):
+        product: int = sum_all - sum_of_product_cards
+        if product <= 1:
+            break
+
+        ok = True
+        we_got_sum: int = 0
+        for p, n in ordered_dict.items():
+            count = 0
+            while product % p == 0:
+                product = int(product / p)
+                count += 1
+
+            if count > n:
+                ok = False
+                break
+            we_got_sum += count * p
+
+        if not ok:
+            continue
+
+        if product == 1 and we_got_sum == sum_of_product_cards:
+            return sum_all - sum_of_product_cards
+
+    return 0
+
+
+# import sys
+
+# sys.stdin = open("prime_time_test.txt", "r")
 
 T = int(input())
 for i in range(T):
-    arr = []
+    d = OrderedDict()
     M = int(input())
     for j in range(M):
         p, n = list(map(int, input().split()))
-        arr += [p] * n
+        d[p] = n
 
-    result = solve(arr)
+    result = solve(d)
     print(f"Case #{i+1}: {result}")
