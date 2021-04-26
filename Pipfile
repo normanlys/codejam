@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 pylint = "*"
 black = "*"
+numpy = "*"
 
 [dev-packages]
 black = "*"
